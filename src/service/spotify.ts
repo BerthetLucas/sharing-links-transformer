@@ -11,6 +11,10 @@ type SpotifyTokenResponse = {
 };
 
 export const getSpotifyToken = async (): Promise<string> => {
+  if (!CLIENT_ID || !CLIENT_SECRET) {
+    throw new Error('Missing CLIENT_ID or CLIENT_SECRET');
+  }
+
   const credentials = `${CLIENT_ID}:${CLIENT_SECRET}`;
   const base64Credentials = Buffer.from(credentials).toString('base64');
   const data = new URLSearchParams();
