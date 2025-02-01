@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 if (!process.env.CLIENT_ID || !process.env.CLIENT_SECRET) {
-  throw new Error('Missing environment variables: CLIENT_ID or CLIENT_SECRET');
+  // @ts-ignore
+  return null;
 }
 
 export const CLIENT_ID: string = process.env.CLIENT_ID;
