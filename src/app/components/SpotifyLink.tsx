@@ -1,3 +1,4 @@
+import { Copy } from 'lucide-react';
 import Link from 'next/link';
 import { useGetDeezerIdFromSharingLink, useGetDeezerSongById } from '@/app/hooks/useGetDeezerSong';
 import { useGetSpotifySongInfo } from '@/app/hooks/useGetSpotifySongInfo';
@@ -22,9 +23,10 @@ export const SpotifyLink = ({ deezerSongUrl }: SpotifyLinkProps) => {
     <div className="flex flex-col items-center gap-4">
       <p>You can now share this link to a Spotify User</p>
       <button className="rounded-sm bg-white p-6 text-black">
-        <Link href={link} rel="noopener noreferrer" target="_blank">
-          {link}
-        </Link>
+        <button className="flex gap-3 rounded-lg bg-white p-6 font-bold text-black">
+          <Link href={link}>{link}</Link>
+          <Copy />
+        </button>
       </button>
       <img alt="Album cover" src={cover} />
       <p>{deezerArtist}</p>

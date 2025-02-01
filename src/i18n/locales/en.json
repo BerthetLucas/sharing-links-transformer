@@ -1,5 +1,9 @@
 {
-  "HomePage": {
-    "title": "Break the whole, share your music to everyone"
+  "Title": {
+    "title": "From Spotify to Deezer and the other way around"
+  },
+  "Form": {
+    "placeholder": "Paste your Spotify playlist sharing link here",
+    "button": "Share"
   }
 }
