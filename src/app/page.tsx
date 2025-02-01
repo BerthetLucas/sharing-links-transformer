@@ -2,6 +2,7 @@
 import { useTranslations } from 'next-intl';
 import { Suspense, useEffect, useState } from 'react';
 import { DeezerLink } from '@/app/components/DeezerLink';
+import { FormInputLink } from '@/app/components/FormInputLink';
 import { SpotifyLink } from '@/app/components/SpotifyLink';
 
 export default function HomePage() {
@@ -34,18 +35,9 @@ export default function HomePage() {
   }, [inputUrl]);
 
   return (
-    <main className="gap min-h-screen p-24 text-center">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-5 p-24">
       <h1 className="text-2xl font-semibold">{t('title')}</h1>
-      <form className="text-black" onSubmit={handleSubmit}>
-        <input
-          className="mb-4 rounded border p-2"
-          name="url"
-          placeholder="Entrez l'URL de la chanson"
-          required
-          type="text"
-        />
-        <input className="rounded bg-blue-500 p-2 text-white" type="submit" value="Soumettre" />
-      </form>
+      <FormInputLink deezerSongUrl={deezerSongUrl} onSubmit={handleSubmit} spotifySongId={spotifySongId} />
       {spotifySongId && (
         <Suspense fallback={<div>Loading...</div>}>
           <DeezerLink spotifySongId={spotifySongId} />
