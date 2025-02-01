@@ -25,6 +25,7 @@ export default async function RootLayout({
         <Providers locale={locale} messages={messages}>
           {children}
         </Providers>
+        <footer>Made with ❤️ by ©BerthetLucas</footer>
       </body>
     </html>
   );
