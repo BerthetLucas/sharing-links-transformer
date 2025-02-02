@@ -1,15 +1,16 @@
 import { useTranslations } from 'next-intl';
 
 type FormInputLinkProps = {
+  deezerSongId: string;
   deezerSongUrl: string;
   onSubmit: (event: React.FormEvent) => void;
   spotifySongId: string;
 };
 
-export const FormInputLink = ({ onSubmit, deezerSongUrl, spotifySongId }: FormInputLinkProps) => {
+export const FormInputLink = ({ onSubmit, deezerSongUrl, spotifySongId, deezerSongId }: FormInputLinkProps) => {
   const t = useTranslations('Form');
 
-  if (deezerSongUrl || spotifySongId) {
+  if (deezerSongUrl || spotifySongId || deezerSongId) {
     return null;
   }
 

@@ -2,14 +2,15 @@ import { AudioLines } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 type TitleProps = {
+  deezerSongId: string;
   deezerSongUrl: string;
   spotifySongId: string;
 };
 
-export const Title = ({ deezerSongUrl, spotifySongId }: TitleProps) => {
+export const Title = ({ deezerSongUrl, spotifySongId, deezerSongId }: TitleProps) => {
   const t = useTranslations('Title');
 
-  if (deezerSongUrl || spotifySongId) {
+  if (deezerSongUrl || spotifySongId || deezerSongId) {
     return null;
   }
 

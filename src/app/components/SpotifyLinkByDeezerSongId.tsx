@@ -1,15 +1,13 @@
 import { CopyLinkButton } from '@/app/components/CopyLinkButton';
-import { useGetDeezerIdFromSharingLink, useGetDeezerSongById } from '@/app/hooks/useGetDeezerSong';
+import { useGetDeezerSongById } from '@/app/hooks/useGetDeezerSong';
 import { useGetSpotifySongInfo } from '@/app/hooks/useGetSpotifySongInfo';
 
-type SpotifyLinkProps = {
-  deezerSongUrl: string;
+type SpotifyLinkByDeezerSongIdProps = {
+  deezerId: string;
 };
 
-export const SpotifyLink = ({ deezerSongUrl }: SpotifyLinkProps) => {
-  const { data: deezerApiId } = useGetDeezerIdFromSharingLink(deezerSongUrl);
-
-  const { data: deezerInfo } = useGetDeezerSongById(deezerApiId.id);
+export const SpotifyLinkByDeezerSongId = ({ deezerId }: SpotifyLinkByDeezerSongIdProps) => {
+  const { data: deezerInfo } = useGetDeezerSongById(deezerId);
   const deezerArtist = deezerInfo.artist.name;
   const deezerAlbum = deezerInfo.album.title;
   const deezerTitle = deezerInfo.title;

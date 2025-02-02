@@ -5,6 +5,7 @@ import { FormInputLink } from '@/app/components/FormInputLink';
 import { Loading } from '@/app/components/Loading';
 import { RetryButton } from '@/app/components/RetryButton';
 import { SpotifyLink } from '@/app/components/SpotifyLink';
+import { SpotifyLinkByDeezerSongId } from '@/app/components/SpotifyLinkByDeezerSongId';
 import { Title } from '@/app/components/Title';
 
 export default function HomePage() {
@@ -54,19 +55,28 @@ export default function HomePage() {
       <div className="flex w-full items-end justify-end">
         <RetryButton onClick={handleReset} />
       </div>
-      <Title deezerSongUrl={deezerSongUrl} spotifySongId={spotifySongId} />
-      <FormInputLink deezerSongUrl={deezerSongUrl} onSubmit={handleSubmit} spotifySongId={spotifySongId} />
+      <Title deezerSongId={deezerSongId} deezerSongUrl={deezerSongUrl} spotifySongId={spotifySongId} />
+      <FormInputLink
+        deezerSongId={deezerSongId}
+        deezerSongUrl={deezerSongUrl}
+        onSubmit={handleSubmit}
+        spotifySongId={spotifySongId}
+      />
       {spotifySongId && (
         <Suspense fallback={<Loading />}>
           <DeezerLink spotifySongId={spotifySongId} />
         </Suspense>
       )}
-      {deezerSongUrl ||
-        (deezerSongId && (
-          <Suspense fallback={<Loading />}>
-            <SpotifyLink deezerSongId={deezerSongId} deezerSongUrl={deezerSongUrl} />
-          </Suspense>
-        ))}
+      {deezerSongUrl && (
+        <Suspense fallback={<Loading />}>
+          <SpotifyLink deezerSongUrl={deezerSongUrl} />
+        </Suspense>
+      )}
+      {deezerSongId && (
+        <Suspense fallback={<Loading />}>
+          <SpotifyLinkByDeezerSongId deezerId={deezerSongId} />
+        </Suspense>
+      )}
     </main>
   );
 }
