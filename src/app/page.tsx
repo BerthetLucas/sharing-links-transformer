@@ -11,10 +11,12 @@ export default function HomePage() {
   const [inputUrl, setInputUrl] = useState('');
   const [spotifySongId, setSpotifySongId] = useState('');
   const [deezerSongUrl, setDeezerSongUrl] = useState('');
+  const [deezerSongId, setDeezerSongId] = useState('');
 
   function handleSubmit(event: React.FormEvent) {
     setDeezerSongUrl('');
     setSpotifySongId('');
+    setDeezerSongId('');
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
     const url = formData.get('url') as string;
@@ -25,6 +27,7 @@ export default function HomePage() {
     setInputUrl('');
     setDeezerSongUrl('');
     setSpotifySongId('');
+    setDeezerSongId('');
   }
 
   useEffect(() => {
@@ -33,11 +36,16 @@ export default function HomePage() {
     }
     const splitedURL = inputUrl.split('/');
     const songId = splitedURL.at(-1);
+
     if (songId && splitedURL[2] === 'open.spotify.com') {
       setSpotifySongId(songId);
     }
     if (songId && splitedURL[2] === 'deezer.page.link') {
       setDeezerSongUrl(inputUrl);
+    }
+
+    if (songId && splitedURL[2] === 'www.deezer.com') {
+      setDeezerSongId(songId);
     }
   }, [inputUrl]);
 
@@ -53,11 +61,12 @@ export default function HomePage() {
           <DeezerLink spotifySongId={spotifySongId} />
         </Suspense>
       )}
-      {deezerSongUrl && (
-        <Suspense fallback={<Loading />}>
-          <SpotifyLink deezerSongUrl={deezerSongUrl} />{' '}
-        </Suspense>
-      )}
+      {deezerSongUrl ||
+        (deezerSongId && (
+          <Suspense fallback={<Loading />}>
+            <SpotifyLink deezerSongId={deezerSongId} deezerSongUrl={deezerSongUrl} />
+          </Suspense>
+        ))}
     </main>
   );
 }

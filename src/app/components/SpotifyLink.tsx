@@ -4,12 +4,16 @@ import { useGetDeezerIdFromSharingLink, useGetDeezerSongById } from '@/app/hooks
 import { useGetSpotifySongInfo } from '@/app/hooks/useGetSpotifySongInfo';
 
 type SpotifyLinkProps = {
+  deezerSongId: string;
   deezerSongUrl: string;
 };
 
-export const SpotifyLink = ({ deezerSongUrl }: SpotifyLinkProps) => {
+export const SpotifyLink = ({ deezerSongUrl, deezerSongId }: SpotifyLinkProps) => {
   const { data: deezerApiId } = useGetDeezerIdFromSharingLink(deezerSongUrl);
-  const { data: deezerInfo } = useGetDeezerSongById(deezerApiId.id);
+
+  const deezerId = deezerSongId ? deezerSongId : deezerApiId.id;
+
+  const { data: deezerInfo } = useGetDeezerSongById(deezerId);
   const deezerArtist = deezerInfo.artist.name;
   const deezerAlbum = deezerInfo.album.title;
   const deezerTitle = deezerInfo.title;
