@@ -1,6 +1,6 @@
 export type DeezerTrack = {
   album: {
-    cover: string;
+    cover_big: string;
   };
   artist: {
     id: number;

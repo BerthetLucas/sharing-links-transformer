@@ -1,4 +1,5 @@
 import { CopyLinkButton } from '@/app/components/CopyLinkButton';
+import { ImageContainer } from '@/app/components/ImageContainer';
 import { useGetDeezerSongById } from '@/app/hooks/useGetDeezerSong';
 import { useGetSpotifySongInfo } from '@/app/hooks/useGetSpotifySongInfo';
 
@@ -24,7 +25,7 @@ export const SpotifyLinkByDeezerSongId = ({ deezerId }: SpotifyLinkByDeezerSongI
         <p>{link}</p>
         <CopyLinkButton link={link} />
       </div>
-      <img alt="Album cover" src={cover} />
+      <ImageContainer image={cover} />
       <p>{deezerArtist}</p>
       <p>{deezerTitle}</p>
     </div>
