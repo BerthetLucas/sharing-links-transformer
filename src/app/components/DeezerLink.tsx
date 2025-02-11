@@ -1,5 +1,6 @@
 'use client';
 import { CopyLinkButton } from '@/app/components/CopyLinkButton';
+import { ImageContainer } from '@/app/components/ImageContainer';
 import { useGetDeezerSong } from '@/app/hooks/useGetDeezerSong';
 import { useGetSpotifySong } from '@/app/hooks/useGetSpotifySong';
 
@@ -17,7 +18,7 @@ export const DeezerLink = ({ spotifySongId }: DeezerLinkProps) => {
   const { data: deezerInfo } = useGetDeezerSong(spotifyArtiste, spotifyTitle, spotifyAlbum);
 
   const link = deezerInfo.data[0].link;
-  const cover = deezerInfo.data[0].album.cover;
+  const cover = deezerInfo.data[0].album.cover_big;
 
   return (
     <div className="flex flex-col items-center gap-4 rounded-lg border border-white bg-gray-900 p-10">
@@ -26,7 +27,7 @@ export const DeezerLink = ({ spotifySongId }: DeezerLinkProps) => {
         <p>{link}</p>
         <CopyLinkButton link={link} />
       </div>
-      <img alt="" src={cover} />
+      <ImageContainer image={cover} />
       <p>{spotifyArtiste}</p>
       <p>{spotifyTitle}</p>
     </div>
