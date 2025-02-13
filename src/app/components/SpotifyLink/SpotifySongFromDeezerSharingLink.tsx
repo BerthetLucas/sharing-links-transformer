@@ -20,5 +20,5 @@ export const SpotifySongFromDeezerSharingLink = ({ deezerSongUrl }: SpotifySongF
   const link = spotifyTrackInfo.tracks.items[0].external_urls.spotify;
   const cover = spotifyTrackInfo.tracks.items[0].album.images[1].url;
 
-  return <SongCard artist={deezerArtist} cover={cover} link={link} plateform="spotify" title={deezerTitle} />;
+  return <SongCard artist={deezerArtist} cover={cover} link={link} platform="spotify" title={deezerTitle} />;
 };
