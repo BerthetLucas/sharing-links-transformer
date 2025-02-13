@@ -5,10 +5,9 @@ import { useGetSpotifySongInfo } from '@/app/hooks/useGetSpotifySongInfo';
 
 type SpotifySongFromDeezerSharingLinkProps = {
   deezerSongUrl: string;
-}
+};
 
-export const SpotifySongFromDeezerSharingLink = ({deezerSongUrl}: SpotifySongFromDeezerSharingLinkProps) => {
-
+export const SpotifySongFromDeezerSharingLink = ({ deezerSongUrl }: SpotifySongFromDeezerSharingLinkProps) => {
   const { data: deezerId } = useGetDeezerIdFromSharingLink(deezerSongUrl);
 
   const { data: deezerInfo } = useGetDeezerSongById(deezerId.id);
@@ -21,5 +20,5 @@ export const SpotifySongFromDeezerSharingLink = ({deezerSongUrl}: SpotifySongFro
   const link = spotifyTrackInfo.tracks.items[0].external_urls.spotify;
   const cover = spotifyTrackInfo.tracks.items[0].album.images[1].url;
 
-  return <SongCard artist={deezerArtist} cover={cover} link={link} plateform="spotify" title={deezerTitle} />
+  return <SongCard artist={deezerArtist} cover={cover} link={link} plateform="spotify" title={deezerTitle} />;
 };
