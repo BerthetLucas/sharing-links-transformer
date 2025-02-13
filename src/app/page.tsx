@@ -4,8 +4,7 @@ import { DeezerLink } from '@/app/components/DeezerLink';
 import { FormInputLink } from '@/app/components/FormInputLink';
 import { Loading } from '@/app/components/Loading';
 import { RetryButton } from '@/app/components/RetryButton';
-import { SpotifyLink } from '@/app/components/SpotifyLink';
-import { SpotifyLinkByDeezerSongId } from '@/app/components/SpotifyLinkByDeezerSongId';
+import { SpotifyLink } from '@/app/components/SpotifyLink/SpotifyLink';
 import { Title } from '@/app/components/Title';
 
 export default function HomePage() {
@@ -67,16 +66,12 @@ export default function HomePage() {
           <DeezerLink spotifySongId={spotifySongId} />
         </Suspense>
       )}
-      {deezerSongUrl && (
-        <Suspense fallback={<Loading />}>
-          <SpotifyLink deezerSongUrl={deezerSongUrl} />
-        </Suspense>
-      )}
-      {deezerSongId && (
-        <Suspense fallback={<Loading />}>
-          <SpotifyLinkByDeezerSongId deezerId={deezerSongId} />
-        </Suspense>
-      )}
+      {deezerSongUrl ||
+        (deezerSongId && (
+          <Suspense fallback={<Loading />}>
+            <SpotifyLink deezerId={deezerSongId} deezerSongUrl={deezerSongUrl} />
+          </Suspense>
+        ))}
     </main>
   );
 }
