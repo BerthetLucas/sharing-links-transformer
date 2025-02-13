@@ -5,13 +5,13 @@ type SongCardProps = {
   artist: string;
   cover: string;
   link: string;
+  platform: 'spotify' | 'deezer';
   title: string;
-  plateform: 'spotify' | 'deezer';
 };
 
-export const SongCard = ({ artist, cover, link, title, plateform }: SongCardProps) => {
+export const SongCard = ({ artist, cover, link, title, platform }: SongCardProps) => {
   const description =
-    plateform === 'spotify'
+    platform === 'spotify'
       ? 'You can now share this link to a Spotify User'
       : 'You can now share this link to a Deezer User';
 
