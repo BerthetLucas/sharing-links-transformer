@@ -1,22 +1,25 @@
 'use client';
-import { Suspense, useEffect, useState } from 'react';
+import { useAtom } from 'jotai';
+import { RESET } from 'jotai/utils';
+import { Suspense, useEffect } from 'react';
 import { DeezerLink } from '@/app/components/DeezerLink';
 import { FormInputLink } from '@/app/components/FormInputLink';
 import { Loading } from '@/app/components/Loading';
 import { RetryButton } from '@/app/components/RetryButton';
 import { SpotifyLink } from '@/app/components/SpotifyLink/SpotifyLink';
 import { Title } from '@/app/components/Title';
+import { deezerSongIdAtom, deezerSongUrlAtom, inputUrlAtom, spotifySongIdAtom } from '@/app/store/linksAtoms';
 
 export default function HomePage() {
-  const [inputUrl, setInputUrl] = useState('');
-  const [spotifySongId, setSpotifySongId] = useState('');
-  const [deezerSongUrl, setDeezerSongUrl] = useState('');
-  const [deezerSongId, setDeezerSongId] = useState('');
+  const [inputUrl, setInputUrl] = useAtom(inputUrlAtom);
+  const [spotifySongId, setSpotifySongId] = useAtom(spotifySongIdAtom);
+  const [deezerSongUrl, setDeezerSongUrl] = useAtom(deezerSongUrlAtom);
+  const [deezerSongId, setDeezerSongId] = useAtom(deezerSongIdAtom);
 
   function handleSubmit(event: React.FormEvent) {
-    setDeezerSongUrl('');
-    setSpotifySongId('');
-    setDeezerSongId('');
+    setDeezerSongUrl(RESET);
+    setSpotifySongId(RESET);
+    setDeezerSongId(RESET);
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
     const url = formData.get('url') as string;
@@ -24,10 +27,10 @@ export default function HomePage() {
   }
 
   function handleReset() {
-    setInputUrl('');
-    setDeezerSongUrl('');
-    setSpotifySongId('');
-    setDeezerSongId('');
+    setInputUrl(RESET);
+    setDeezerSongUrl(RESET);
+    setSpotifySongId(RESET);
+    setDeezerSongId(RESET);
   }
 
   useEffect(() => {
