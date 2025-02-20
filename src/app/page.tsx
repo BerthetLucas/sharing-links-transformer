@@ -9,6 +9,7 @@ import { RetryButton } from '@/app/components/RetryButton';
 import { SpotifyLink } from '@/app/components/SpotifyLink/SpotifyLink';
 import { Title } from '@/app/components/Title';
 import { deezerSongIdAtom, deezerSongUrlAtom, inputUrlAtom, spotifySongIdAtom } from '@/app/store/linksAtoms';
+import type { FormEvent } from 'react';
 
 export default function HomePage() {
   const [inputUrl, setInputUrl] = useAtom(inputUrlAtom);
@@ -16,7 +17,7 @@ export default function HomePage() {
   const [deezerSongUrl, setDeezerSongUrl] = useAtom(deezerSongUrlAtom);
   const [deezerSongId, setDeezerSongId] = useAtom(deezerSongIdAtom);
 
-  function handleSubmit(event: React.FormEvent) {
+  function handleSubmit(event: FormEvent) {
     setDeezerSongUrl(RESET);
     setSpotifySongId(RESET);
     setDeezerSongId(RESET);
@@ -52,7 +53,7 @@ export default function HomePage() {
     if (songId && splitedURL[2] === 'www.deezer.com') {
       setDeezerSongId(songId);
     }
-  }, [inputUrl]);
+  }, [inputUrl, setDeezerSongId, setDeezerSongUrl, setSpotifySongId]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-8 md:p-24">
