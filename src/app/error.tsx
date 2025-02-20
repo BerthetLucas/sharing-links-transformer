@@ -1,24 +1,20 @@
 'use client';
-import { useResetAtom } from 'jotai/utils';
 import { AlertTriangle, InfoIcon } from 'lucide-react';
 import { RetryButton } from '@/app/components/RetryButton';
-import { deezerSongIdAtom, deezerSongUrlAtom, inputUrlAtom, spotifySongIdAtom } from '@/app/store/linksAtoms';
+import { useReset } from '@/app/store/linksAtoms';
 
 type ErrorProps = {
   reset: () => void;
 };
 
 export default function Error({ reset }: ErrorProps) {
-  const resetInputUrl = useResetAtom(inputUrlAtom);
-  const resetDeezerSongUrl = useResetAtom(deezerSongUrlAtom);
-  const resetSpotifySongId = useResetAtom(spotifySongIdAtom);
-  const resetSetDeezerSongId = useResetAtom(deezerSongIdAtom);
+  const { resetInputUrl, resetDeezerSongUrl, resetSpotifySongId, resetDeezerSongId } = useReset();
 
   const handleResetErrorsClick = () => {
     resetInputUrl();
     resetDeezerSongUrl();
     resetSpotifySongId();
-    resetSetDeezerSongId();
+    resetDeezerSongId();
     reset();
   };
 

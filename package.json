@@ -22,7 +22,8 @@
     "next": "15.1.6",
     "next-intl": "3.26.0",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "react-spinners": "0.15.0"
   },
   "devDependencies": {
     "@testing-library/dom": "10.4.0",
