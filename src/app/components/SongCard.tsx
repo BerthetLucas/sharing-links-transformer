@@ -27,10 +27,10 @@ export const SongCard = ({ artist, cover, link, title, platform }: SongCardProps
       : 'You can now share this link to a Deezer User';
 
   return (
-    <section className="flex flex-col-reverse items-center gap-10 md:flex-row">
-      <div className="flex w-3/4 flex-col items-center gap-4 rounded-lg border border-white bg-gray-900 p-10 text-center md:w-fit">
+    <section className="flex w-full flex-col-reverse items-center gap-10 px-4 md:w-3/4 md:flex-row">
+      <div className="flex w-full flex-col items-center gap-4 rounded-lg border border-white bg-gray-900 p-6 text-center md:w-auto">
         <p>{description}</p>
-        <div className="flex w-full gap-3 rounded-lg bg-white p-6 font-bold text-black">
+        <div className="flex max-w-full gap-3 rounded-lg bg-white p-6 font-bold text-black">
           <p className="truncate">{link}</p>
           <CopyLinkButton link={link} />
         </div>
