@@ -13,9 +13,6 @@ dependencies:
   jotai:
     specifier: 2.12.1
     version: 2.12.1(@types/react@19.0.0)(react@19.0.0)
-  ldrs:
-    specifier: 1.0.2
-    version: 1.0.2
   lucide-react:
     specifier: 0.474.0
     version: 0.474.0(react@19.0.0)
@@ -3302,10 +3299,6 @@ packages:
     dependencies:
       language-subtag-registry: 0.3.23
     dev: true
-
-  /ldrs@1.0.2:
-    resolution: {integrity: sha512-sYJmivdkIiHrUEqTrEWccBoLdaENpzbzkABI5rk8rRxTXrg9i2xVuDvUUuhOhJY3RmQyaoxs046pM1DCRdcIpg==}
-    dev: false
 
   /levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
