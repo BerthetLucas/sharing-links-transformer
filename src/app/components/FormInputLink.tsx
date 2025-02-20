@@ -1,9 +1,11 @@
+'use client';
 import { useTranslations } from 'next-intl';
+import type { FormEvent } from 'react';
 
 type FormInputLinkProps = {
   deezerSongId: string;
   deezerSongUrl: string;
-  onSubmit: (event: React.FormEvent) => void;
+  onSubmit: (event: FormEvent) => void;
   spotifySongId: string;
 };
 
