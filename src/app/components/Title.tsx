@@ -15,9 +15,9 @@ export const Title = ({ deezerSongUrl, spotifySongId, deezerSongId }: TitleProps
   }
 
   return (
-    <div className="flex flex-col items-center gap-3 md:flex-row">
-      <h1 className="text-center text-xl font-semibold md:text-2xl">{t('title')}</h1>
-      <AudioLines />
+    <div className="flex flex-col-reverse items-center gap-5 md:flex-row md:gap-1">
+      <h1 className="mx-4 text-center text-xl font-semibold md:text-2xl">{t('title')}</h1>
+      <AudioLines size={40} />
     </div>
   );
 };

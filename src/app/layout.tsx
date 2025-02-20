@@ -1,10 +1,8 @@
-import { Inter } from 'next/font/google';
 import { getLocale, getMessages } from 'next-intl/server';
+import { monda } from '@/app/fonts';
 import Providers from '@/app/Providers';
 import type { Metadata } from 'next';
 import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'next-template',
@@ -21,7 +19,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={inter.className}>
+      <body className={monda.className}>
         <Providers locale={locale} messages={messages}>
           {children}
         </Providers>
