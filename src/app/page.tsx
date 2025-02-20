@@ -33,6 +33,8 @@ export default function HomePage() {
     setDeezerSongId(RESET);
   }
 
+  const isUrlSet = spotifySongId || deezerSongUrl || deezerSongId;
+
   useEffect(() => {
     if (!inputUrl) {
       return;
@@ -53,10 +55,12 @@ export default function HomePage() {
   }, [inputUrl]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-8 p-24">
-      <div className="flex w-full items-end justify-end">
-        <RetryButton onClick={handleReset} />
-      </div>
+    <main className="flex min-h-screen flex-col items-center justify-center gap-8 md:p-24">
+      {isUrlSet && (
+        <div className="flex w-full items-end justify-center md:justify-end">
+          <RetryButton onClick={handleReset} />
+        </div>
+      )}
       <Title deezerSongId={deezerSongId} deezerSongUrl={deezerSongUrl} spotifySongId={spotifySongId} />
       <FormInputLink
         deezerSongId={deezerSongId}

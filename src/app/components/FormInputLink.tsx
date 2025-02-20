@@ -15,7 +15,7 @@ export const FormInputLink = ({ onSubmit, deezerSongUrl, spotifySongId, deezerSo
   }
 
   return (
-    <form className="flex w-1/2 flex-col items-center gap-4 text-black" onSubmit={onSubmit}>
+    <form className="flex w-3/4 flex-col items-center gap-4 text-black md:w-1/2" onSubmit={onSubmit}>
       <input
         className="mb-4 w-full rounded border p-2"
         name="url"
