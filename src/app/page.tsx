@@ -5,7 +5,6 @@ import { Suspense, useEffect } from 'react';
 import { DeezerLink } from '@/app/components/DeezerLink';
 import { FormInputLink } from '@/app/components/FormInputLink';
 import { Loading } from '@/app/components/Loading';
-import { RetryButton } from '@/app/components/RetryButton';
 import { SpotifyLink } from '@/app/components/SpotifyLink/SpotifyLink';
 import { Title } from '@/app/components/Title';
 import { deezerSongIdAtom, deezerSongUrlAtom, inputUrlAtom, spotifySongIdAtom } from '@/app/store/linksAtoms';
@@ -26,15 +25,6 @@ export default function HomePage() {
     const url = formData.get('url') as string;
     setInputUrl(url);
   }
-
-  function handleReset() {
-    setInputUrl(RESET);
-    setDeezerSongUrl(RESET);
-    setSpotifySongId(RESET);
-    setDeezerSongId(RESET);
-  }
-
-  const isUrlSet = spotifySongId || deezerSongUrl || deezerSongId;
 
   useEffect(() => {
     if (!inputUrl) {
@@ -57,11 +47,6 @@ export default function HomePage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-8 md:p-24">
-      {isUrlSet && (
-        <div className="flex w-full items-end justify-center md:justify-end">
-          <RetryButton onClick={handleReset} />
-        </div>
-      )}
       <Title deezerSongId={deezerSongId} deezerSongUrl={deezerSongUrl} spotifySongId={spotifySongId} />
       <FormInputLink
         deezerSongId={deezerSongId}
