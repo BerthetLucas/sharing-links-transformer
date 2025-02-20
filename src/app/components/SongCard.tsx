@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { CopyLinkButton } from '@/app/components/CopyLinkButton';
 import { ImageContainer } from '@/app/components/ImageContainer';
 import { RetryButton } from '@/app/components/RetryButton';
@@ -12,6 +13,7 @@ type SongCardProps = {
 };
 
 export const SongCard = ({ artist, cover, link, title, platform }: SongCardProps) => {
+  const t = useTranslations('Card');
   const { resetInputUrl, resetDeezerSongUrl, resetSpotifySongId, resetDeezerSongId } = useReset();
 
   function handleReset() {
@@ -21,10 +23,7 @@ export const SongCard = ({ artist, cover, link, title, platform }: SongCardProps
     resetDeezerSongId();
   }
 
-  const description =
-    platform === 'spotify'
-      ? 'You can now share this link to a Spotify User'
-      : 'You can now share this link to a Deezer User';
+  const description = platform === 'spotify' ? t('spotifyUser') : t('deezerUser');
 
   return (
     <section className="flex w-full flex-col-reverse items-center gap-10 px-4 md:w-3/4 md:flex-row">
