@@ -21,7 +21,7 @@ export default function Error({ reset }: ErrorProps) {
   };
 
   return (
-    <section className="flex h-screen flex-col items-center justify-center gap-10">
+    <section className="flex h-screen flex-col items-center justify-center gap-10 bg-black text-white">
       <div className="flex items-center gap-2">
         <AlertTriangle className="text-red-700" size="56" />
         <p className="text-xl font-bold">{t('title')}</p>
