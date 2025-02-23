@@ -27,7 +27,7 @@ export const SongCard = ({ artist, cover, link, title, platform }: SongCardProps
 
   return (
     <section className="l flex w-full flex-col-reverse items-center gap-10 px-4 md:w-3/4 md:flex-row">
-      <div className="flex w-full flex-col items-center gap-4 rounded-lg border border-white bg-red-400 p-6 text-center md:w-auto dark:bg-gray-900">
+      <div className="flex w-full flex-col items-center gap-4 rounded-lg border border-white bg-gray-900 p-6 text-center md:w-auto">
         <p>{description}</p>
         <div className="flex max-w-full gap-3 rounded-lg bg-white p-6 font-bold text-black">
           <p className="truncate">{link}</p>
