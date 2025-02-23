@@ -46,7 +46,7 @@ export default function HomePage() {
   }, [inputUrl, setDeezerSongId, setDeezerSongUrl, setSpotifySongId]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-8 bg-black text-white md:p-24">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-8 md:p-24">
       <Title deezerSongId={deezerSongId} deezerSongUrl={deezerSongUrl} spotifySongId={spotifySongId} />
       <FormInputLink
         deezerSongId={deezerSongId}

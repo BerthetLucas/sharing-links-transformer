@@ -19,7 +19,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={monda.className}>
+      <body className={`${monda.className} bg-black text-white`}>
         <Providers locale={locale} messages={messages}>
           {children}
         </Providers>
