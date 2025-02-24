@@ -11,6 +11,7 @@
     "prettier": "prettier ./src --check --config .prettierrc",
     "prettier:fix": "prettier ./src --write --config .prettierrc",
     "test": "vitest",
+    "test:e2e": "exec playwright test",
     "types": "tsc"
   },
   "dependencies": {
