@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test('When I share a valid Deezer link, I should get a Spotify Link', async ({ page }) => {
-  await page.goto('http://localhost:3000');
+  await page.goto('https://sharing-links-transformer.vercel.app/');
   await expect(page.getByText('From Spotify to Deezer and the other way around')).toBeVisible();
   const inputUrl = page.getByTestId('form-url-input');
   await inputUrl.fill('https://deezer.page.link/PkxJQhuEp3ftedoM9');
