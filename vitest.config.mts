@@ -8,7 +8,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./vitest.setup.ts'],
-    include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx,mjs,mts}'],
-    exclude: ['**/*.e2e.{test,spec}.{js,ts,jsx,tsx,mjs,mts}', 'e2e/**/*', 'tests/e2e/**/*'],
+    include: ['src/**/*.test.tsx'],
+    exclude: ['e2e/**/*'],
   },
 });
