@@ -24,6 +24,7 @@ jobs:
 
     - name: Start app
       run: pnpm run start &
+           sleep 20
 
     - name: Run Playwright tests
       run: pnpm exec playwright test
