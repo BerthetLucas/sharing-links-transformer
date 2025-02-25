@@ -1,4 +1,5 @@
 import { getRequestConfig } from 'next-intl/server';
+import type { AbstractIntlMessages } from 'next-intl';
 
 export default getRequestConfig(async () => {
   // Provide a static locale, fetch a user setting,
@@ -7,7 +8,7 @@ export default getRequestConfig(async () => {
 
   return {
     locale,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment
-    messages: (await import(`./locales/${locale}.json`)).default,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    messages: (await import(`../../messages/${locale}.json`)).default as AbstractIntlMessages,
   };
 });

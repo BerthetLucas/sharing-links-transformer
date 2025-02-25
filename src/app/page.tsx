@@ -59,12 +59,11 @@ export default function HomePage() {
           <DeezerLink spotifySongId={spotifySongId} />
         </Suspense>
       )}
-      {deezerSongUrl ||
-        (deezerSongId && (
-          <Suspense fallback={<Loading />}>
-            <SpotifyLink deezerId={deezerSongId} deezerSongUrl={deezerSongUrl} />
-          </Suspense>
-        ))}
+      {(deezerSongUrl || deezerSongId) && (
+        <Suspense fallback={<Loading />}>
+          <SpotifyLink deezerId={deezerSongId} deezerSongUrl={deezerSongUrl} />
+        </Suspense>
+      )}
     </main>
   );
 }

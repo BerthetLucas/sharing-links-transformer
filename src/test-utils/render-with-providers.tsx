@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { NextIntlClientProvider } from 'next-intl';
-import messages from '@/i18n/locales/en.json';
+import messages from '../../messages/en.json';
 import type { RenderOptions } from '@testing-library/react';
 import type { ReactElement } from 'react';
 
