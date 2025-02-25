@@ -24,13 +24,19 @@ jobs:
       env:
         CLIENT_ID: ${{secrets.CLIENT_ID}}
         CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
-        NEXT_PUBLIC_DEFAULT_LOCALE: 'en'
+
 
     - name: Start app
       run: pnpm run start &
            sleep 10
+      env:
+        CLIENT_ID: ${{secrets.CLIENT_ID}}
+        CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
     - name: Run Playwright tests
       run: pnpm exec playwright test
+      env:
+        CLIENT_ID: ${{secrets.CLIENT_ID}}
+        CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
