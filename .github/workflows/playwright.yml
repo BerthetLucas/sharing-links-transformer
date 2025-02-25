@@ -24,7 +24,10 @@ jobs:
 
     - name: Start app
       run: pnpm run start &
-           sleep 5
+           sleep 10
+      env:
+        CLIENT_ID: ${{secrets.CLIENT_ID}}
+        CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
     - name: Run Playwright tests
       run: pnpm exec playwright test
       env:
