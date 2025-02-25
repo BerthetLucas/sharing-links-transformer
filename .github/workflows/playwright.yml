@@ -21,10 +21,6 @@ jobs:
 
     - name: Build app
       run: pnpm run build
-      env:
-        CLIENT_ID: ${{secrets.CLIENT_ID}}
-        CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
-
 
     - name: Start app
       run: pnpm run start &
