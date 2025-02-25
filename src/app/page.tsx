@@ -37,6 +37,7 @@ export default function HomePage() {
       setSpotifySongId(songId);
     }
     if (songId && splitedURL[2] === 'deezer.page.link') {
+      console.log(inputUrl);
       setDeezerSongUrl(inputUrl);
     }
 
