@@ -1,6 +1,5 @@
-import { getLocale, getMessages } from 'next-intl/server';
 import { monda } from '@/app/fonts';
-import Providers from '@/app/Providers';
+import ProvidersWrapper from '@/app/ProviderWrapper';
 import type { Metadata } from 'next';
 import './globals.css';
 
@@ -9,20 +8,15 @@ export const metadata: Metadata = {
   description: 'A simple Next.js starter template',
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
-  const messages = await getMessages();
-
   return (
-    <html lang={locale}>
+    <html lang="en">
       <body className={`${monda.className} bg-black text-white`}>
-        <Providers locale={locale} messages={messages}>
-          {children}
-        </Providers>
+        <ProvidersWrapper>{children}</ProvidersWrapper>
         <footer>Made with ❤️ by ©BerthetLucas</footer>
       </body>
     </html>
