@@ -8,4 +8,5 @@ test('When I share a valid Spotify link, I should get a Deezer Link', async ({ p
   const submitButton = page.getByTestId('form-url-submit');
   await submitButton.click();
   await expect(page.getByText('You can now share this link to a Deezer User')).toBeVisible({ timeout: 20000 });
+  await expect(page.getByText('https://www.deezer.com/track/13791930')).toBeVisible({ timeout: 20000 });
 });
