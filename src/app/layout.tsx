@@ -7,8 +7,6 @@ export const metadata: Metadata = {
   title: 'Convert Streaming Music Link Platform',
   description: 'A website to change Spotify sharing links into Deezer ones',
   keywords: ['Spotify', 'Deezer', 'Music', 'Link Converter', 'Sharing'],
-  authors: [{ name: 'BerthetLucas' }],
-  creator: 'BerthetLucas',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -23,17 +21,6 @@ export const metadata: Metadata = {
         alt: 'Sharing Link Platform',
       },
     ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Convert Streaming Music Link Platform',
-    description: 'A website to change Spotify sharing links into Deezer ones',
-    images: ['https://www.yourwebsite.com/og-image.png'],
-  },
-  icons: {
-    icon: '/audio-lines.png',
-    shortcut: '/audio-lines.png',
-    apple: '/audio-lines.png',
   },
 };
 
