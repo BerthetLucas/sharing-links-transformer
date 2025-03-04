@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
     const url: string | null = searchParams.get('url');
 
     if (!url) {
-      return NextResponse.json({ error: 'URL is required' }, { status: 400 });
+      return NextResponse.json({});
     }
 
     const response: AxiosResponse<string> = await axios.get(url, { maxRedirects: 5 });
