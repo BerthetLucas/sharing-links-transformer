@@ -26,7 +26,7 @@ const fetchDeezerDataById = async (id: string): Promise<DeezerResponse> => {
   return res.data;
 };
 
-const fetchDeezerSongIdFromSharingLink = async (url: string): Promise<DeezerResponse> => {
+const fetchDeezerSongIdFromSharingLink = async (url: string | null): Promise<DeezerResponse> => {
   const res = await axios.get('/api/deezerGetId', {
     params: {
       url: url,

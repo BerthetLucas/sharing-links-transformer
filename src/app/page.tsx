@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { DeezerLink } from '@/app/components/DeezerLink';
 import { FormInputLink } from '@/app/components/FormInputLink';
 import { Loading } from '@/app/components/Loading';
-import { SpotifyLink } from '@/app/components/SpotifyLink/SpotifyLink';
+import { SpotifyLink } from '@/app/components/SpotifyLink';
 import { Title } from '@/app/components/Title';
 import { useLinkTransformer } from '@/app/hooks/useLinkTransformer';
 
