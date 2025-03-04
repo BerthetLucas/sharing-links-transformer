@@ -7,6 +7,10 @@ type SpotifyLinkProps = {
 };
 
 export const SpotifyLink = ({ deezerSongUrl, deezerId }: SpotifyLinkProps) => {
+  if (!deezerId && !deezerSongUrl) {
+    return null;
+  }
+
   if (deezerId) {
     return <SpotifySongFromStandardLink deezerId={deezerId} />;
   }
@@ -14,6 +18,4 @@ export const SpotifyLink = ({ deezerSongUrl, deezerId }: SpotifyLinkProps) => {
   if (deezerSongUrl) {
     return <SpotifySongFromDeezerSharingLink deezerSongUrl={deezerSongUrl} />;
   }
-
-  return null;
 };

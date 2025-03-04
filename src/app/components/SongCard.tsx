@@ -3,7 +3,6 @@ import { CopyLinkButton } from '@/app/components/CopyLinkButton';
 import { ImageContainer } from '@/app/components/ImageContainer';
 import { MotionSection } from '@/app/components/MotionComponents/MotionSection';
 import { RetryButton } from '@/app/components/RetryButton';
-import { useReset } from '@/app/store/linksAtoms';
 
 type SongCardProps = {
   artist: string;
@@ -15,14 +14,6 @@ type SongCardProps = {
 
 export const SongCard = ({ artist, cover, link, title, platform }: SongCardProps) => {
   const t = useTranslations('Card');
-  const { resetInputUrl, resetDeezerSongUrl, resetSpotifySongId, resetDeezerSongId } = useReset();
-
-  function handleReset() {
-    resetInputUrl();
-    resetDeezerSongUrl();
-    resetSpotifySongId();
-    resetDeezerSongId();
-  }
 
   const description = platform === 'spotify' ? t('spotifyUser') : t('deezerUser');
 
@@ -38,7 +29,7 @@ export const SongCard = ({ artist, cover, link, title, platform }: SongCardProps
         <p>{artist}</p>
         <p>{title}</p>
       </div>
-      <RetryButton onClick={handleReset} />
+      <RetryButton />
     </MotionSection>
   );
 };

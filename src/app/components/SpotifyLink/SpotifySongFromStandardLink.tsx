@@ -1,4 +1,3 @@
-'use client';
 import { SongCard } from '@/app/components/SongCard';
 import { useGetDeezerSongById } from '@/app/hooks/useGetDeezerSong';
 import { useGetSpotifySongInfo } from '@/app/hooks/useGetSpotifySongInfo';
