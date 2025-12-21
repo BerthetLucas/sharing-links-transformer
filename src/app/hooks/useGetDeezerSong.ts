@@ -11,7 +11,6 @@ const fetchDeezerData = async (artist: string, title: string, album: string): Pr
     },
   });
 
-   
   return res.data;
 };
 
@@ -22,7 +21,6 @@ const fetchDeezerDataById = async (id: string): Promise<DeezerResponse> => {
     },
   });
 
-   
   return res.data;
 };
 
@@ -33,7 +31,6 @@ const fetchDeezerSongIdFromSharingLink = async (url: string | null): Promise<Dee
     },
   });
 
-   
   return res.data;
 };
 
