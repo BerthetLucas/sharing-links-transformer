@@ -1,7 +1,6 @@
 import { SongCard } from '@/app/components/SongCard';
 import { useGetDeezerIdFromSharingLink, useGetDeezerSongById } from '@/app/hooks/useGetDeezerSong';
 import { useGetSpotifySongInfo } from '@/app/hooks/useGetSpotifySongInfo';
-import { useMemo } from 'react';
 
 type SpotifyLinkProps = {
   deezerId: string;
@@ -11,18 +10,18 @@ type SpotifyLinkProps = {
 export const SpotifyLink = ({ deezerSongUrl, deezerId }: SpotifyLinkProps) => {
   const { data: deezerIdFromLink } = useGetDeezerIdFromSharingLink(deezerSongUrl);
 
-  const info = useMemo(() => (deezerId ? deezerId : (deezerIdFromLink?.id ?? '')), [deezerId, deezerIdFromLink]);
+  const info = deezerId ? deezerId : deezerIdFromLink.id;
 
   const { data: deezerInfo } = useGetDeezerSongById(info);
 
-  const deezerArtist = useMemo(() => deezerInfo?.artist?.name ?? '', [deezerInfo]);
-  const deezerAlbum = useMemo(() => deezerInfo?.album?.title ?? '', [deezerInfo]);
-  const deezerTitle = useMemo(() => deezerInfo?.title ?? '', [deezerInfo]);
+  const deezerArtist = deezerInfo.artist.name;
+  const deezerAlbum = deezerInfo.album.title;
+  const deezerTitle = deezerInfo.title;
 
   const { data: spotifyTrackInfo } = useGetSpotifySongInfo(deezerArtist, deezerAlbum, deezerTitle);
 
-  const link = useMemo(() => spotifyTrackInfo?.tracks?.items?.[0]?.external_urls?.spotify ?? '', [spotifyTrackInfo]);
-  const cover = useMemo(() => spotifyTrackInfo?.tracks?.items?.[0]?.album?.images?.[1]?.url ?? '', [spotifyTrackInfo]);
+  const link = spotifyTrackInfo.tracks.items[0].external_urls.spotify;
+  const cover = spotifyTrackInfo.tracks.items[0].album.images[1].url;
 
   return <SongCard artist={deezerArtist} cover={cover} link={link} platform="spotify" title={deezerTitle} />;
 };
