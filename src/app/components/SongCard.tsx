@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { CopyLinkButton } from '@/app/components/CopyLinkButton';
 import { ImageContainer } from '@/app/components/ImageContainer';
-import { MotionSection } from '@/app/components/MotionComponents/MotionSection';
 import { RetryButton } from '@/app/components/RetryButton';
 
 type SongCardProps = {
