@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import type { ReactNode } from 'react';
 
 type MotionSectionProps = {
@@ -12,7 +12,7 @@ export const MotionSection = ({ children, className, delay }: MotionSectionProps
     <motion.section
       className={className}
       initial={{ opacity: 0 }}
-      transition={{ duration: 1, delay: delay ?? 0 }}
+      transition={{ duration: 5, delay: delay ?? 0 }}
       viewport={{ once: true }}
       whileInView={{ opacity: 1 }}
     >
