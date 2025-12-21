@@ -43,8 +43,18 @@ jobs:
         run: pnpm run build
 
       - name: Start app
-        run: pnpm run start &
-          until curl --silent --fail http://localhost:3000; do sleep 1; done
+        run: |
+          pnpm run start &
+          for i in {1..30}; do
+            if curl --silent --fail http://localhost:3000 > /dev/null 2>&1; then
+              echo "App is running"
+              exit 0
+            fi
+            echo "Waiting for app to start... ($i/30)"
+            sleep 2
+          done
+          echo "Failed to start app"
+          exit 1
         env:
           CLIENT_ID: ${{secrets.CLIENT_ID}}
           CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
