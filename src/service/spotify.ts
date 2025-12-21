@@ -30,17 +30,16 @@ export const getSpotifyToken = async (): Promise<string> => {
   return response.data.access_token;
 };
 
-export const getSpotifySong = async (songId: string) => {
+export const getSpotifySong = async (songId: string): Promise<SpotifyResponse> => {
   const token = await getSpotifyToken();
   const url = `https://api.spotify.com/v1/tracks/${songId}`;
 
-  const response = await axios.get(url, {
+  const response = await axios.get<SpotifyResponse>(url, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return response.data;
 };
 
