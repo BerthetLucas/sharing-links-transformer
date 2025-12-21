@@ -28,6 +28,7 @@
     "react-spinners": "0.15.0"
   },
   "devDependencies": {
+    "@eslint/compat": "2.0.0",
     "@playwright/test": "1.50.1",
     "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "6.6.3",
@@ -39,7 +40,7 @@
     "@typescript-eslint/eslint-plugin": "8.17.0",
     "@typescript-eslint/parser": "8.22.0",
     "@vitejs/plugin-react": "4.3.3",
-    "eslint": "^9",
+    "eslint": "^9.39.2",
     "eslint-config-next": "16.1.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.31.0",

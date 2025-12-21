@@ -11,7 +11,7 @@ const fetchDeezerData = async (artist: string, title: string, album: string): Pr
     },
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+   
   return res.data;
 };
 
@@ -22,7 +22,7 @@ const fetchDeezerDataById = async (id: string): Promise<DeezerResponse> => {
     },
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+   
   return res.data;
 };
 
@@ -33,7 +33,7 @@ const fetchDeezerSongIdFromSharingLink = async (url: string | null): Promise<Dee
     },
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+   
   return res.data;
 };
 

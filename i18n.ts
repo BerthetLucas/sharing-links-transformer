@@ -11,7 +11,7 @@ export default getRequestConfig(async () => {
 
   return {
     locale,
-    // @ts-ignore
+
     messages: messages[locale as keyof typeof messages],
   };
 });
