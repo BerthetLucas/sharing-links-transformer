@@ -1,4 +1,5 @@
 'use client';
+
 import { SongCard } from '@/app/components/SongCard';
 import { useGetDeezerSong } from '@/app/hooks/useGetDeezerSong';
 import { useGetSpotifySong } from '@/app/hooks/useGetSpotifySong';
@@ -16,8 +17,8 @@ export const DeezerLink = ({ spotifySongId }: DeezerLinkProps) => {
 
   const { data: deezerInfo } = useGetDeezerSong(spotifyArtiste, spotifyTitle, spotifyAlbum);
 
-  const link = deezerInfo.data[0].link;
-  const cover = deezerInfo.data[0].album.cover_big;
+  const link = deezerInfo.data[0]?.link;
+  const cover = deezerInfo.data[0]?.album?.cover_big;
 
   return <SongCard artist={spotifyArtiste} cover={cover} link={link} platform="deezer" title={spotifyTitle} />;
 };
