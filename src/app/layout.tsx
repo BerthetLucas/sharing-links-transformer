@@ -1,6 +1,7 @@
 import { monda } from '@/app/fonts';
 import ProvidersWrapper from '@/app/ProviderWrapper';
 import type { Metadata } from 'next';
+import { getLocale, getMessages } from 'next-intl/server';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -24,15 +25,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={`${monda.className} bg-black text-white`}>
-        <ProvidersWrapper>{children}</ProvidersWrapper>
+        <ProvidersWrapper locale={locale} messages={messages}>
+          {children}
+        </ProvidersWrapper>
         <footer>Made with ❤️ by ©BerthetLucas</footer>
       </body>
     </html>

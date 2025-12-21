@@ -1,10 +1,15 @@
-import { getLocale, getMessages } from 'next-intl/server';
 import Providers from '@/app/Providers';
+import type { AbstractIntlMessages } from 'next-intl';
 
-export default async function ProvidersWrapper({ children }: { children: React.ReactNode }) {
-  const locale = await getLocale();
-  const messages = await getMessages();
-
+export default function ProvidersWrapper({
+  children,
+  locale,
+  messages,
+}: {
+  children: React.ReactNode;
+  locale: string;
+  messages: AbstractIntlMessages;
+}) {
   return (
     <Providers locale={locale} messages={messages}>
       {children}

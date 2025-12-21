@@ -2,16 +2,16 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NextIntlClientProvider } from 'next-intl';
-import React from 'react';
 import type { AbstractIntlMessages } from 'next-intl';
+import { ReactNode } from 'react';
 
 type ProviderProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   locale: string;
   messages: AbstractIntlMessages;
 };
 
-export default function Providers({ children, messages, locale }: ProviderProps) {
+export default function Providers({ children, locale, messages }: ProviderProps) {
   const queryClient = new QueryClient();
 
   return (
