@@ -22,8 +22,8 @@ dependencies:
     specifier: 2.12.1
     version: 2.12.1(@types/react@19.2.7)(react@19.2.3)
   lucide-react:
-    specifier: 0.474.0
-    version: 0.474.0(react@19.2.3)
+    specifier: 0.562.0
+    version: 0.562.0(react@19.2.3)
   motion:
     specifier: 12.23.26
     version: 12.23.26(react-dom@19.2.3)(react@19.2.3)
@@ -4149,8 +4149,8 @@ packages:
     dependencies:
       yallist: 3.1.1
 
-  /lucide-react@0.474.0(react@19.2.3):
-    resolution: {integrity: sha512-CmghgHkh0OJNmxGKWc0qfPJCYHASPMVSyGY8fj3xgk4v84ItqDg64JNKFZn5hC6E0vHi6gxnbCgwhyVB09wQtA==}
+  /lucide-react@0.562.0(react@19.2.3):
+    resolution: {integrity: sha512-82hOAu7y0dbVuFfmO4bYF1XEwYk/mEbM5E+b1jgci/udUBEE/R7LF5Ip0CCEmXe8AybRM8L+04eP+LGZeDvkiw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
     dependencies:
