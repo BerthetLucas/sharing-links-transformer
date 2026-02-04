@@ -1,38 +1,8 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import type { DeezerResponse } from '../types/deezer';
+import type { DeezerInformation, DeezerResponse } from '../types/deezer';
+import { fetchDeezerData, fetchDeezerDataById, fetchDeezerSongIdFromSharingLink } from '@/service/deezer';
 
-const fetchDeezerData = async (artist: string, title: string, album: string): Promise<DeezerResponse> => {
-  const res = await axios.get('/api/deezer', {
-    params: {
-      artist: artist,
-      title: title,
-      album: album,
-    },
-  });
-
-  return res.data;
-};
-
-const fetchDeezerDataById = async (id: string): Promise<DeezerResponse> => {
-  const res = await axios.get('/api/deezerGetSong', {
-    params: {
-      id: id,
-    },
-  });
-
-  return res.data;
-};
-
-const fetchDeezerSongIdFromSharingLink = async (url: string | null): Promise<DeezerResponse> => {
-  const res = await axios.get('/api/deezerGetId', {
-    params: {
-      url: url,
-    },
-  });
-
-  return res.data;
-};
 
 export function useGetDeezerSong(artist: string, title: string, album: string) {
   return useSuspenseQuery<DeezerResponse>({
@@ -42,14 +12,14 @@ export function useGetDeezerSong(artist: string, title: string, album: string) {
 }
 
 export function useGetDeezerSongById(id: string) {
-  return useSuspenseQuery<DeezerResponse>({
+  return useSuspenseQuery<DeezerInformation>({
     queryKey: ['deezerById', id],
     queryFn: () => fetchDeezerDataById(id),
   });
 }
 
 export function useGetDeezerIdFromSharingLink(url: string) {
-  return useSuspenseQuery<DeezerResponse>({
+  return useSuspenseQuery<string>({
     queryKey: ['deezerByIdFromSharingLink', url],
     queryFn: () => fetchDeezerSongIdFromSharingLink(url),
   });

@@ -12,10 +12,13 @@ export type DeezerTrack = {
 };
 
 export type DeezerResponse = {
-  album: { title: string };
-  artist: { name: string };
-  data: DeezerTrack[];
-  id: string;
-  title: string;
-  total: number;
+  link: string, 
+  cover: string
 };
+
+export type DeezerInformation = {
+  album: string, 
+  artist: string, 
+  track: string
+}; 
+
