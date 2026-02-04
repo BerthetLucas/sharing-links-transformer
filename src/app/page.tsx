@@ -10,6 +10,8 @@ import { useLinkTransformer } from '@/app/hooks/useLinkTransformer';
 export default function HomePage() {
   const { deezerSongId, spotifySongId, deezerSongUrl, handleSubmit } = useLinkTransformer();
 
+  console.log("deezerId", deezerSongId)
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-8 md:p-24">
       <Title deezerSongId={deezerSongId} deezerSongUrl={deezerSongUrl} spotifySongId={spotifySongId} />

@@ -25,7 +25,12 @@ export const useLinkTransformer = () => {
   if (songId && splitedURL[2] === 'open.spotify.com') {
     setSpotifySongId(songId);
   }
+
   if (songId && splitedURL[2] === 'dzr.page.link') {
+    setDeezerSongUrl(inputUrl);
+  }
+
+  if (songId && splitedURL[2] === 'link.deezer.com') {
     setDeezerSongUrl(inputUrl);
   }
 

@@ -9,18 +9,27 @@ export const fetchDeezerData = async (artist: string, title: string, album: stri
         album: album,
       },
     });
-  
-    return res.data;
+
+    return res.data.data;
   };
   
   export const fetchDeezerDataById = async (id: string): Promise<DeezerInformation> => {
     const res = await axios.get(`https://sharing-link-back-end-production.up.railway.app/deezer/id/${id}`)
   
-    return res.data;
+    return res.data.data;
   };
   
-  export const fetchDeezerSongIdFromSharingLink = async (url: string | null): Promise<string> => {
-    const res = await axios.get(`https://sharing-link-back-end-production.up.railway.app/deezer/url/${url}`);
-  
-    return res.data;
+  export const fetchDeezerSongIdFromSharingLink = async (url: string | null): Promise<string | null> => {
+
+    if(!url){
+      return ''; 
+    }
+
+    const res = await axios.get(`https://sharing-link-back-end-production.up.railway.app/deezer/url/`, {
+      params: {
+        url: url,
+      },
+    });
+
+    return res.data.data;
   };

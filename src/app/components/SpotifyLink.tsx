@@ -8,11 +8,12 @@ type SpotifyLinkProps = {
 };
 
 export const SpotifyLink = ({ deezerSongUrl, deezerId }: SpotifyLinkProps) => {
+
   const { data: deezerIdFromLink } = useGetDeezerIdFromSharingLink(deezerSongUrl);
 
   const info = deezerId ? deezerId : deezerIdFromLink;
 
-  const { data: deezerInfo } = useGetDeezerSongById(info);
+  const { data: deezerInfo } = useGetDeezerSongById(info as string);
   const {artist, track, album} = deezerInfo; 
 
   const { data: spotifyTrackInfo } = useGetSpotifySongInfo(artist, album, track);

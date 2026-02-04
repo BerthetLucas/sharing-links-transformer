@@ -18,8 +18,8 @@ export function useGetDeezerSongById(id: string) {
   });
 }
 
-export function useGetDeezerIdFromSharingLink(url: string) {
-  return useSuspenseQuery<string>({
+export function useGetDeezerIdFromSharingLink(url: string | null) {
+  return useSuspenseQuery<string | null>({
     queryKey: ['deezerByIdFromSharingLink', url],
     queryFn: () => fetchDeezerSongIdFromSharingLink(url),
   });
