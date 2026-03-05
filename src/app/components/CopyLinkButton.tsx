@@ -16,8 +16,6 @@ export const CopyLinkButton = ({ link }: CopyLinkButtonProps) => {
   };
 
   return (
-    <button onClick={() => void handleCopy()}>
-      {isCopied ? <Check className="text-green-600" /> : <Copy />}
-    </button>
+    <button onClick={() => void handleCopy()}>{isCopied ? <Check className="text-green-600" /> : <Copy />}</button>
   );
 };
