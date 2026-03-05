@@ -1,7 +1,8 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import type { DeezerInformation, DeezerResponse } from '../types/deezer';
-import { fetchDeezerData, fetchDeezerDataById, fetchDeezerSongIdFromSharingLink } from '@/service/deezer';
+import { fetchDeezerData } from '@/service/deezer/fetchDeezerData';
+import { fetchDeezerDataById } from '@/service/deezer/fetchDeezerDataById';
+import { fetchDeezerSongIdFromSharingLink } from '@/service/deezer/fetchDeezerSongIdFromSharingLink';
 
 export function useGetDeezerSong(artist: string, title: string, album: string) {
   return useSuspenseQuery<DeezerResponse>({
