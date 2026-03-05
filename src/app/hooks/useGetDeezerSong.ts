@@ -3,7 +3,6 @@ import axios from 'axios';
 import type { DeezerInformation, DeezerResponse } from '../types/deezer';
 import { fetchDeezerData, fetchDeezerDataById, fetchDeezerSongIdFromSharingLink } from '@/service/deezer';
 
-
 export function useGetDeezerSong(artist: string, title: string, album: string) {
   return useSuspenseQuery<DeezerResponse>({
     queryKey: ['deezer', artist, title, album],

@@ -12,13 +12,12 @@ export type DeezerTrack = {
 };
 
 export type DeezerResponse = {
-  link: string, 
-  cover: string
+  link: string;
+  cover: string;
 };
 
 export type DeezerInformation = {
-  album: string, 
-  artist: string, 
-  track: string
-}; 
-
+  album: string;
+  artist: string;
+  track: string;
+};

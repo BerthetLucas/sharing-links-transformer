@@ -17,10 +17,10 @@ export const DeezerLink = ({ spotifySongId }: DeezerLinkProps) => {
 
   const { data: deezerInfo } = useGetDeezerSong(spotifyArtiste, spotifyTitle, spotifyAlbum);
 
-  const {link, cover} = deezerInfo; 
+  const { link, cover } = deezerInfo;
 
-  console.log(link); 
-  console.log(cover); 
+  console.log(link);
+  console.log(cover);
 
   return <SongCard artist={spotifyArtiste} cover={cover} link={link} platform="deezer" title={spotifyTitle} />;
 };
