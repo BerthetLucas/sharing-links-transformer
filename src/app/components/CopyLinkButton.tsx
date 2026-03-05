@@ -1,33 +1,23 @@
 'use client';
 import { Check, Copy } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 type CopyLinkButtonProps = {
   link: string;
 };
 
 export const CopyLinkButton = ({ link }: CopyLinkButtonProps) => {
-  const [isCopied, setIsCopied] = useState('');
+  const [isCopied, setIsCopied] = useState(false);
 
-  useEffect(() => {
-    if (!isCopied) return;
-    const copyLink = async () => {
-      await navigator.clipboard.writeText(link);
-      setTimeout(() => {
-        setIsCopied('');
-      }, 30000);
-    };
-    void copyLink();
-  }, [isCopied, link]);
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(link);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+  };
 
   return (
-    <button
-      onClick={() => {
-        setIsCopied(link);
-      }}
-    >
-      {!isCopied && <Copy />}
-      {isCopied && <Check className="text-green-600" />}
+    <button onClick={() => void handleCopy()}>
+      {isCopied ? <Check className="text-green-600" /> : <Copy />}
     </button>
   );
 };

@@ -1,15 +1,18 @@
+'use client';
+import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
 import type { FormEvent } from 'react';
+import { deezerSongIdAtom, deezerSongUrlAtom, spotifySongIdAtom } from '@/app/store/linksAtoms';
 
 type FormInputLinkProps = {
-  deezerSongId: string;
-  deezerSongUrl: string;
   onSubmit: (event: FormEvent) => void;
-  spotifySongId: string;
 };
 
-export const FormInputLink = ({ onSubmit, deezerSongUrl, spotifySongId, deezerSongId }: FormInputLinkProps) => {
+export const FormInputLink = ({ onSubmit }: FormInputLinkProps) => {
   const t = useTranslations('Form');
+  const deezerSongUrl = useAtomValue(deezerSongUrlAtom);
+  const spotifySongId = useAtomValue(spotifySongIdAtom);
+  const deezerSongId = useAtomValue(deezerSongIdAtom);
 
   if (deezerSongUrl || spotifySongId || deezerSongId) {
     return null;
