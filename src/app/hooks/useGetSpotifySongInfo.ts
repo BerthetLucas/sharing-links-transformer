@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { getSpotifyInfo } from '@/service/spotify';
+import { getSpotifyInfo } from '@/service/spotify/getSpotifyInfo';
 import type { SpotifyResponse } from '@/app/types/spotify';
 
 export const useGetSpotifySongInfo = (artist: string, album: string, track: string) => {
