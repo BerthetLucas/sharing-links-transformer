@@ -1,4 +1,5 @@
 import { useAtom } from 'jotai';
+import { useEffect } from 'react';
 import { deezerSongIdAtom, deezerSongUrlAtom, inputUrlAtom, spotifySongIdAtom, useReset } from '@/app/store/linksAtoms';
 import type { FormEvent } from 'react';
 
@@ -19,24 +20,18 @@ export const useLinkTransformer = () => {
     setInputUrl(url);
   };
 
-  const splitedURL = inputUrl.split('/');
-  const songId = splitedURL.at(-1);
+  useEffect(() => {
+    const splitedURL = inputUrl.split('/');
+    const songId = splitedURL.at(-1);
 
-  if (songId && splitedURL[2] === 'open.spotify.com') {
-    setSpotifySongId(songId);
-  }
-
-  if (songId && splitedURL[2] === 'dzr.page.link') {
-    setDeezerSongUrl(inputUrl);
-  }
-
-  if (songId && splitedURL[2] === 'link.deezer.com') {
-    setDeezerSongUrl(inputUrl);
-  }
-
-  if (songId && splitedURL[2] === 'www.deezer.com') {
-    setDeezerSongId(songId);
-  }
+    if (songId && splitedURL[2] === 'open.spotify.com') {
+      setSpotifySongId(songId);
+    } else if (songId && (splitedURL[2] === 'dzr.page.link' || splitedURL[2] === 'link.deezer.com')) {
+      setDeezerSongUrl(inputUrl);
+    } else if (songId && splitedURL[2] === 'www.deezer.com') {
+      setDeezerSongId(songId);
+    }
+  }, [inputUrl, setSpotifySongId, setDeezerSongUrl, setDeezerSongId]);
 
   return {
     spotifySongId,

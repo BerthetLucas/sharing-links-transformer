@@ -1,14 +1,14 @@
+'use client';
 import { AudioLines } from 'lucide-react';
+import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
+import { deezerSongIdAtom, deezerSongUrlAtom, spotifySongIdAtom } from '@/app/store/linksAtoms';
 
-type TitleProps = {
-  deezerSongId: string;
-  deezerSongUrl: string;
-  spotifySongId: string;
-};
-
-export const Title = ({ deezerSongUrl, spotifySongId, deezerSongId }: TitleProps) => {
+export const Title = () => {
   const t = useTranslations('Title');
+  const deezerSongUrl = useAtomValue(deezerSongUrlAtom);
+  const spotifySongId = useAtomValue(spotifySongIdAtom);
+  const deezerSongId = useAtomValue(deezerSongIdAtom);
 
   if (deezerSongUrl || spotifySongId || deezerSongId) {
     return null;
