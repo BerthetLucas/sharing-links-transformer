@@ -11,7 +11,9 @@ export default function HomePage() {
   return (
     <>
       <div className="flex justify-center pt-6">
-        <Badge variant="outline" className="border-white text-white">Free &amp; Open Source</Badge>
+        <Badge variant="outline" className="border-white text-white">
+          Free &amp; Open Source
+        </Badge>
       </div>
       <main className="flex min-h-screen flex-col items-center justify-center gap-8 md:p-24">
         <Title />
