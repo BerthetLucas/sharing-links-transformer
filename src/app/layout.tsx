@@ -1,5 +1,6 @@
 import { monda } from '@/app/fonts';
 import ProvidersWrapper from '@/app/ProviderWrapper';
+import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import { getLocale, getMessages } from 'next-intl/server';
 import './globals.css';
@@ -82,6 +83,7 @@ export default async function RootLayout({
           {children}
         </ProvidersWrapper>
         <footer>Made with ❤️ by ©BerthetLucas</footer>
+        <Analytics />
       </body>
     </html>
   );
