@@ -29,7 +29,7 @@ export const FormInputLink = ({ onSubmit }: FormInputLinkProps) => {
         type="text"
       />
       <input
-        className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md border border-neutral-200 bg-transparent px-6 font-medium [box-shadow:0px_4px_1px_#a3a3a3] transition-all active:translate-y-[2px] active:shadow-none"
+        className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md border border-neutral-200 bg-transparent px-6 font-medium [box-shadow:0px_4px_1px_#a3a3a3] transition-all active:translate-y-0.5 active:shadow-none"
         data-testid="form-url-submit"
         type="submit"
         value={t('button')}
