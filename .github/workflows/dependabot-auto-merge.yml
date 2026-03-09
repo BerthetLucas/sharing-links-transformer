@@ -1,0 +1,234 @@
+name: Dependabot Auto-merge
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build project
+        id: build
+        run: pnpm build
+
+      - name: Analyze with Claude
+        id: claude
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          PAYLOAD=$(jq -n \
+            --arg pkg "${{ steps.metadata.outputs.dependency-names }}" \
+            --arg from "${{ steps.metadata.outputs.previous-version }}" \
+            --arg to "${{ steps.metadata.outputs.new-version }}" \
+            --arg type "${{ steps.metadata.outputs.update-type }}" \
+            --arg body "$PR_BODY" \
+            '{
+              model: "claude-haiku-4-5-20251001",
+              max_tokens: 300,
+              messages: [{
+                role: "user",
+                content: ("Tu es un expert en dependances npm. Analyse cette PR Dependabot pour un portfolio web (Astro + React + TypeScript).\nPackage: " + $pkg + "\nVersion: " + $from + " -> " + $to + " (" + $type + ")\nDescription PR:\n\n" + $body + "\n\nReponds UNIQUEMENT avec du JSON brut valide, sans balises markdown, sans texte avant ou apres: {\"safe\": true/false, \"reason\": \"une phrase en francais expliquant pourquoi\"}\nsafe=true = pas de breaking changes attendus, merge automatique OK.")
+              }]
+            }')
+
+          RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
+            -H "x-api-key: $ANTHROPIC_API_KEY" \
+            -H "anthropic-version: 2023-06-01" \
+            -H "content-type: application/json" \
+            -d "$PAYLOAD")
+
+          echo "Claude raw response: $RESPONSE"
+
+          TEXT=$(echo "$RESPONSE" | jq -r '.content[0].text' 2>/dev/null)
+          if [ -z "$TEXT" ] || [ "$TEXT" = "null" ]; then
+            SAFE="error"
+            REASON="Erreur API Claude - reponse inattendue"
+          else
+            # Supprimer les balises markdown si Claude les ajoute malgre tout
+            CLEAN=$(echo "$TEXT" | sed 's/```json//g' | sed 's/```//g')
+            SAFE=$(echo "$CLEAN" | jq -r '.safe' 2>/dev/null || echo "error")
+            REASON=$(echo "$CLEAN" | jq -r '.reason' 2>/dev/null || echo "Erreur parsing reponse Claude")
+            [ "$SAFE" = "null" ] && SAFE="error"
+            [ "$REASON" = "null" ] && REASON="Erreur parsing reponse Claude"
+          fi
+
+          echo "safe=$SAFE" >> "$GITHUB_OUTPUT"
+          echo "reason=$REASON" >> "$GITHUB_OUTPUT"
+
+      # Auto-merge si : build OK + patch/minor + Claude dit explicitement safe
+      - name: Auto-merge
+        if: |
+          steps.build.outcome == 'success' &&
+          (steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+           steps.metadata.outputs.update-type == 'version-update:semver-minor') &&
+          steps.claude.outputs.safe == 'true'
+        run: gh pr merge --squash --auto "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Notif verte : merge OK
+      - name: Discord - auto-merge OK
+        if: |
+          steps.build.outcome == 'success' &&
+          (steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+           steps.metadata.outputs.update-type == 'version-update:semver-minor') &&
+          steps.claude.outputs.safe == 'true'
+        run: |
+          REASON="${{ steps.claude.outputs.reason }}"
+          [ -z "$REASON" ] && REASON="Analyse Claude non disponible"
+          PAYLOAD=$(jq -n \
+            --arg pkg "${{ steps.metadata.outputs.dependency-names }}" \
+            --arg ver "${{ steps.metadata.outputs.previous-version }} -> ${{ steps.metadata.outputs.new-version }}" \
+            --arg type "${{ steps.metadata.outputs.update-type }}" \
+            --arg pr "${{ github.event.pull_request.html_url }}" \
+            --arg reason "$REASON" \
+            '{embeds: [{
+              title: "Dependance auto-mergee",
+              color: 3066993,
+              fields: [
+                {name: "Package", value: $pkg, inline: true},
+                {name: "Version", value: $ver, inline: true},
+                {name: "Type", value: $type, inline: true},
+                {name: "Analyse Claude", value: $reason},
+                {name: "PR", value: $pr}
+              ]
+            }]}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      # Notif orange : erreur API Claude
+      - name: Discord - erreur analyse Claude
+        if: |
+          steps.build.outcome == 'success' &&
+          (steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+           steps.metadata.outputs.update-type == 'version-update:semver-minor') &&
+          steps.claude.outputs.safe == 'error'
+        run: |
+          PAYLOAD=$(jq -n \
+            --arg pkg "${{ steps.metadata.outputs.dependency-names }}" \
+            --arg ver "${{ steps.metadata.outputs.previous-version }} -> ${{ steps.metadata.outputs.new-version }}" \
+            --arg pr "${{ github.event.pull_request.html_url }}" \
+            '{embeds: [{
+              title: "Erreur analyse Claude - review manuelle requise",
+              color: 15105570,
+              fields: [
+                {name: "Package", value: $pkg, inline: true},
+                {name: "Version", value: $ver, inline: true},
+                {name: "Raison", value: "Claude na pas pu analyser la PR, merci de verifier manuellement."},
+                {name: "PR", value: $pr}
+              ]
+            }]}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      # Notif orange : Claude juge risque (patch/minor mais flagge)
+      - name: Discord - Claude juge risque
+        if: |
+          steps.build.outcome == 'success' &&
+          (steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+           steps.metadata.outputs.update-type == 'version-update:semver-minor') &&
+          steps.claude.outputs.safe == 'false'
+        run: |
+          PAYLOAD=$(jq -n \
+            --arg pkg "${{ steps.metadata.outputs.dependency-names }}" \
+            --arg ver "${{ steps.metadata.outputs.previous-version }} -> ${{ steps.metadata.outputs.new-version }}" \
+            --arg type "${{ steps.metadata.outputs.update-type }}" \
+            --arg pr "${{ github.event.pull_request.html_url }}" \
+            --arg reason "${{ steps.claude.outputs.reason }}" \
+            '{embeds: [{
+              title: "Review requise - Claude a detecte un risque",
+              color: 15105570,
+              fields: [
+                {name: "Package", value: $pkg, inline: true},
+                {name: "Version", value: $ver, inline: true},
+                {name: "Type", value: $type, inline: true},
+                {name: "Raison", value: $reason},
+                {name: "PR", value: $pr}
+              ]
+            }]}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      # Notif orange : mise a jour majeure
+      - name: Discord - major, review manuelle
+        if: steps.metadata.outputs.update-type == 'version-update:semver-major'
+        run: |
+          REASON="${{ steps.claude.outputs.reason }}"
+          [ -z "$REASON" ] && REASON="Mise a jour majeure - verifier les breaking changes"
+          PAYLOAD=$(jq -n \
+            --arg pkg "${{ steps.metadata.outputs.dependency-names }}" \
+            --arg ver "${{ steps.metadata.outputs.previous-version }} -> ${{ steps.metadata.outputs.new-version }}" \
+            --arg pr "${{ github.event.pull_request.html_url }}" \
+            --arg reason "$REASON" \
+            '{embeds: [{
+              title: "Mise a jour majeure - review requise",
+              color: 15105570,
+              fields: [
+                {name: "Package", value: $pkg, inline: true},
+                {name: "Version", value: $ver, inline: true},
+                {name: "Analyse Claude", value: $reason},
+                {name: "PR", value: $pr}
+              ]
+            }]}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      # Notif rouge : build echoue
+      - name: Discord - build echoue
+        if: steps.build.outcome == 'failure'
+        run: |
+          PAYLOAD=$(jq -n \
+            --arg pkg "${{ steps.metadata.outputs.dependency-names }}" \
+            --arg ver "${{ steps.metadata.outputs.previous-version }} -> ${{ steps.metadata.outputs.new-version }}" \
+            --arg pr "${{ github.event.pull_request.html_url }}" \
+            '{embeds: [{
+              title: "Build echoue - PR non mergee",
+              color: 15158332,
+              fields: [
+                {name: "Package", value: $pkg, inline: true},
+                {name: "Version", value: $ver, inline: true},
+                {name: "PR", value: $pr}
+              ]
+            }]}')
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
