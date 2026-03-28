@@ -6,13 +6,10 @@ type RetryButtonProps = {
 };
 
 export const RetryButton = ({ onClick }: RetryButtonProps) => {
-  const { resetInputUrl, resetDeezerSongUrl, resetSpotifySongId, resetDeezerSongId } = useReset();
+  const { resetAll } = useReset();
 
   function handleReset() {
-    resetInputUrl();
-    resetDeezerSongUrl();
-    resetSpotifySongId();
-    resetDeezerSongId();
+    resetAll();
   }
 
   return (

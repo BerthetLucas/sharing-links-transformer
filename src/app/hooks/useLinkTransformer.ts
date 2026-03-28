@@ -11,10 +11,10 @@ export const useLinkTransformer = () => {
   const [deezerSongId, setDeezerSongId] = useAtom(deezerSongIdAtom);
 
   const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
     resetDeezerSongUrl();
     resetSpotifySongId();
     resetDeezerSongId();
-    event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
     const url = formData.get('url') as string;
     setInputUrl(url);

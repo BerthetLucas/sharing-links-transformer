@@ -8,9 +8,15 @@ type SpotifyTokenResponse = {
   token_type: string;
 };
 
+let cachedToken: { value: string; expiresAt: number } | null = null;
+
 export const getSpotifyToken = async (): Promise<string> => {
   if (!CLIENT_ID || !CLIENT_SECRET) {
     throw new Error('Missing CLIENT_ID or CLIENT_SECRET');
+  }
+
+  if (cachedToken && Date.now() < cachedToken.expiresAt) {
+    return cachedToken.value;
   }
 
   const credentials = `${CLIENT_ID}:${CLIENT_SECRET}`;
@@ -25,5 +31,10 @@ export const getSpotifyToken = async (): Promise<string> => {
     },
   });
 
-  return response.data.access_token;
+  cachedToken = {
+    value: response.data.access_token,
+    expiresAt: Date.now() + (response.data.expires_in - 60) * 1000,
+  };
+
+  return cachedToken.value;
 };

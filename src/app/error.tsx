@@ -10,13 +10,10 @@ type ErrorProps = {
 
 export default function Error({ reset }: ErrorProps) {
   const t = useTranslations('Error');
-  const { resetInputUrl, resetDeezerSongUrl, resetSpotifySongId, resetDeezerSongId } = useReset();
+  const { resetAll } = useReset();
 
   const handleResetErrorsClick = () => {
-    resetInputUrl();
-    resetDeezerSongUrl();
-    resetSpotifySongId();
-    resetDeezerSongId();
+    resetAll();
     reset();
   };
 
