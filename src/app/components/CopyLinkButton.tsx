@@ -10,7 +10,12 @@ export const CopyLinkButton = ({ link }: CopyLinkButtonProps) => {
   const [isCopied, setIsCopied] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
-  useEffect(() => () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); }, []);
+  useEffect(
+    () => () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    },
+    [],
+  );
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(link);
