@@ -12,7 +12,7 @@ export const SpotifyLink = ({ deezerSongUrl, deezerId }: SpotifyLinkProps) => {
 
   const info = deezerId ? deezerId : deezerIdFromLink;
 
-  const { data: deezerInfo } = useGetDeezerSongById(info as string);
+  const { data: deezerInfo } = useGetDeezerSongById(info!);
   const { artist, track, album } = deezerInfo;
 
   const { data: spotifyTrackInfo } = useGetSpotifySongInfo(artist, album, track);

@@ -1,6 +1,6 @@
 'use client';
 import { Check, Copy } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type CopyLinkButtonProps = {
   link: string;
@@ -8,11 +8,15 @@ type CopyLinkButtonProps = {
 
 export const CopyLinkButton = ({ link }: CopyLinkButtonProps) => {
   const [isCopied, setIsCopied] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
+
+  useEffect(() => () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); }, []);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(link);
     setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => setIsCopied(false), 2000);
   };
 
   return (

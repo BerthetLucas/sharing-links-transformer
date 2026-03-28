@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const fetchDeezerSongIdFromSharingLink = async (url: string | null): Promise<string | null> => {
   if (!url) {
-    return '';
+    return null;
   }
 
   const res = await axios.get(`https://sharing-link-back-end-production.up.railway.app/deezer/url/`, {

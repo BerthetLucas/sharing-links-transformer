@@ -11,10 +11,18 @@ export const useReset = () => {
   const resetSpotifySongId = useResetAtom(spotifySongIdAtom);
   const resetDeezerSongId = useResetAtom(deezerSongIdAtom);
 
+  const resetAll = () => {
+    resetInputUrl();
+    resetDeezerSongUrl();
+    resetSpotifySongId();
+    resetDeezerSongId();
+  };
+
   return {
     resetInputUrl,
     resetDeezerSongUrl,
     resetSpotifySongId,
     resetDeezerSongId,
+    resetAll,
   };
 };
