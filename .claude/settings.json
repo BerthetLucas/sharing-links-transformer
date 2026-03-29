@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /Users/lucasberthet/Documents/sharing-links-transformer && pnpm prettier:fix 2>/dev/null; pnpm lint:fix 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"$CLAUDE_TOOL_INPUT\" | grep -q '\\.env' && echo 'BLOCK: Édition des fichiers .env interdite - modifie manuellement.' && exit 2 || true"
+          }
+        ]
+      }
+    ]
+  }
+}

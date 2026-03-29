@@ -16,7 +16,7 @@ export default function Providers({ children, locale, messages }: ProviderProps)
 
   return (
     <QueryClientProvider client={queryClient}>
-      <NextIntlClientProvider locale={locale} messages={messages}>
+      <NextIntlClientProvider locale={locale} messages={messages} timeZone="UTC">
         {children}
       </NextIntlClientProvider>
     </QueryClientProvider>
