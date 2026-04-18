@@ -12,5 +12,3 @@ test('When I share non valid link, I should get an error', async ({ page }) => {
   await retryButton.click();
   await expect(page.getByText('From Spotify to Deezer and the other way around')).toBeVisible();
 });
-
-//
