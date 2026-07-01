@@ -128,11 +128,11 @@ importers:
         specifier: 8.5.12
         version: 8.5.12
       prettier:
-        specifier: 3.8.1
-        version: 3.8.1
+        specifier: 3.9.4
+        version: 3.9.4
       prettier-plugin-tailwindcss:
         specifier: 0.8.0
-        version: 0.8.0(prettier@3.8.1)
+        version: 0.8.0(prettier@3.9.4)
       tailwindcss:
         specifier: 4.3.0
         version: 4.3.0
@@ -2817,8 +2817,8 @@ packages:
       prettier-plugin-svelte:
         optional: true
 
-  prettier@3.8.1:
-    resolution: {integrity: sha512-UOnG6LftzbdaHZcKoPFtOcCKztrQ57WkHDeRD9t/PTQtmT0NHSeWWepj6pS0z/N7+08BHFDQVUrfmfMRcZwbMg==}
+  prettier@3.9.4:
+    resolution: {integrity: sha512-yWG/o/4oJfo036EKAfK6ACAoDOfHeRHx4tuxkfBZiauURiaSmYwlpOr5LQqKtIkRD2z1PLteme2WoxEnj4tHTg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -5873,11 +5873,11 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-tailwindcss@0.8.0(prettier@3.8.1):
+  prettier-plugin-tailwindcss@0.8.0(prettier@3.9.4):
     dependencies:
-      prettier: 3.8.1
+      prettier: 3.9.4
 
-  prettier@3.8.1: {}
+  prettier@3.9.4: {}
 
   pretty-format@27.5.1:
     dependencies:
