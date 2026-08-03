@@ -9,7 +9,8 @@
   },
   "Card": {
     "spotifyUser": "You can now share this link to a Spotify User",
-    "deezerUser": "You can now share this link to a Deezer User"
+    "deezerUser": "You can now share this link to a Deezer User",
+    "genericUser": "You can now share this link to a {platform} User"
   },
   "Error": {
     "title": "Oooops something went wrong",
