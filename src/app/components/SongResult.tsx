@@ -1,31 +1,20 @@
 'use client';
 import { Suspense } from 'react';
 import { useAtomValue } from 'jotai';
-import { deezerSongIdAtom, deezerSongUrlAtom, spotifySongIdAtom } from '@/app/store/linksAtoms';
-import { DeezerLink } from './DeezerLink';
+import { inputUrlAtom } from '@/app/store/linksAtoms';
 import { Loading } from './Loading';
-import { SpotifyLink } from './SpotifyLink';
+import { PlatformLinks } from './PlatformLinks';
 
 export const SongResult = () => {
-  const spotifySongId = useAtomValue(spotifySongIdAtom);
-  const deezerSongUrl = useAtomValue(deezerSongUrlAtom);
-  const deezerSongId = useAtomValue(deezerSongIdAtom);
+  const inputUrl = useAtomValue(inputUrlAtom);
 
-  if (!spotifySongId && !deezerSongUrl && !deezerSongId) {
+  if (!inputUrl) {
     return null;
-  }
-
-  if (spotifySongId) {
-    return (
-      <Suspense fallback={<Loading />}>
-        <DeezerLink spotifySongId={spotifySongId} />
-      </Suspense>
-    );
   }
 
   return (
     <Suspense fallback={<Loading />}>
-      <SpotifyLink deezerId={deezerSongId} deezerSongUrl={deezerSongUrl} />
+      <PlatformLinks url={inputUrl} />
     </Suspense>
   );
 };
