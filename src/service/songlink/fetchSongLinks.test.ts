@@ -15,10 +15,9 @@ describe('fetchSongLinks', () => {
 
     const result = await fetchSongLinks('https://www.deezer.com/track/456');
 
-    expect(axios.get).toHaveBeenCalledWith(
-      'https://sharing-link-back-end-production.up.railway.app/songlink',
-      { params: { url: 'https://www.deezer.com/track/456' } },
-    );
+    expect(axios.get).toHaveBeenCalledWith('https://sharing-link-back-end-production.up.railway.app/songlink', {
+      params: { url: 'https://www.deezer.com/track/456' },
+    });
     expect(result).toEqual(data);
   });
 });
