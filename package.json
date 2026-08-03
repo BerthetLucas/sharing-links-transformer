@@ -54,7 +54,7 @@
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-unused-imports": "4.4.1",
     "jsdom": "30.0.1",
-    "postcss": "8.5.13",
+    "postcss": "8.5.18",
     "prettier": "3.9.5",
     "prettier-plugin-tailwindcss": "0.8.0",
     "tailwindcss": "4.3.0",
