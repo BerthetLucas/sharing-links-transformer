@@ -2,14 +2,12 @@
 import { AudioLines } from 'lucide-react';
 import { useAtomValue } from 'jotai';
 import { useTranslations } from 'next-intl';
-import { deezerSongIdAtom, deezerSongUrlAtom, spotifySongIdAtom } from '@/app/store/linksAtoms';
+import { inputUrlAtom } from '@/app/store/linksAtoms';
 export const Title = () => {
   const t = useTranslations('Title');
-  const deezerSongUrl = useAtomValue(deezerSongUrlAtom);
-  const spotifySongId = useAtomValue(spotifySongIdAtom);
-  const deezerSongId = useAtomValue(deezerSongIdAtom);
+  const inputUrl = useAtomValue(inputUrlAtom);
 
-  if (deezerSongUrl || spotifySongId || deezerSongId) {
+  if (inputUrl) {
     return null;
   }
 
