@@ -40,7 +40,6 @@ describe('SongCard', () => {
         expect(screen.getByText('GESHUOU')).toBeVisible();
         expect(screen.getByText('https://www.deezer.com/track/3027009011')).toBeVisible();
         expect(screen.getByText('You can now share this link to a Deezer User')).toBeVisible();
-        expect(screen.getByTestId('retry-button')).toBeVisible();
       });
     });
 

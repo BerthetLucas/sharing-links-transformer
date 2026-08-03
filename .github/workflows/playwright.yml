@@ -53,16 +53,10 @@ jobs:
           done
           echo "Failed to start app"
           exit 1
-        env:
-          CLIENT_ID: ${{secrets.CLIENT_ID}}
-          CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
 
       - name: Run Playwright tests
         id: end-to-end-tests
         run: pnpm exec playwright test
-        env:
-          CLIENT_ID: ${{secrets.CLIENT_ID}}
-          CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}

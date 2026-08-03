@@ -10,7 +10,7 @@ test('When I share a valid streaming link, I should get links for other platform
   await expect(page.getByText('You can now share this link to a Spotify User')).toBeVisible({ timeout: 15000 });
   await expect(page.getByText('Nirvana')).toBeVisible();
   await expect(page.getByText('Smells Like Teen Spirit')).toBeVisible();
-  const retryButton = page.getAllByTestId('retry-button').first();
+  const retryButton = page.getByTestId('retry-button');
   await retryButton.click();
   await expect(page.getByText('From Spotify to Deezer and the other way around')).toBeVisible();
 });
