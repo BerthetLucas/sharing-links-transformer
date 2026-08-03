@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { describe, expect, it, vi } from 'vitest';
+import { BACKEND_BASE_URL } from '@/config/backend';
 import { fetchSongLinks } from './fetchSongLinks';
 import type { SongLinkData } from '@/app/types/songlink';
 
@@ -15,7 +16,7 @@ describe('fetchSongLinks', () => {
 
     const result = await fetchSongLinks('https://www.deezer.com/track/456');
 
-    expect(axios.get).toHaveBeenCalledWith('https://sharing-link-back-end-production.up.railway.app/songlink', {
+    expect(axios.get).toHaveBeenCalledWith(`${BACKEND_BASE_URL}/songlink`, {
       params: { url: 'https://www.deezer.com/track/456' },
     });
     expect(result).toEqual(data);

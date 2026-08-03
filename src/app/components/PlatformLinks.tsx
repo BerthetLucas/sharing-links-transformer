@@ -1,6 +1,7 @@
 import { useGetSongLinks } from '@/app/hooks/useGetSongLinks';
 import { RetryButton } from '@/app/components/RetryButton';
 import { SongCard } from './SongCard';
+import { SpotifyCard } from './SpotifyCard';
 
 type PlatformLinksProps = {
   url: string;
@@ -28,8 +29,9 @@ export const PlatformLinks = ({ url }: PlatformLinksProps) => {
 
   return (
     <>
+      {sourcePlatform !== 'spotify' && <SpotifyCard artist={data.artist ?? ''} title={data.title ?? ''} />}
       {data.platforms
-        .filter(({ platform }) => platform !== sourcePlatform)
+        .filter(({ platform }) => platform !== sourcePlatform && platform !== 'spotify')
         .map(({ platform, url: platformUrl }) => (
           <SongCard
             key={platform}

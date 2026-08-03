@@ -23,7 +23,8 @@ export const SongCard = ({ artist, cover, link, title, platform }: SongCardProps
   const description = messageKey ? t(messageKey) : t('genericUser', { platform });
 
   return (
-    <MotionSection className="flex w-full items-center gap-10 px-4">
+    <MotionSection className="flex w-full flex-col items-center justify-center gap-2 px-4">
+      <p className="font-bold uppercase">{platform}</p>
       <div className="flex w-full flex-col items-center gap-4 rounded-lg border border-white bg-gray-900 p-6 text-center md:w-auto">
         <p>{description}</p>
         <div className="flex max-w-full gap-3 rounded-lg bg-white p-6 font-bold text-black">
