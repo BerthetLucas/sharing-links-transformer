@@ -11,13 +11,10 @@ This project is made to easily share music from one streaming service to another
 3. Run the command below to install the dependencies:
    ```bash
    pnpm install
-4. To run the app locally you'll need to create a .env file for the Spotify API. To get an CLIENT_ID and a CLIENT_SECRET please consult the Spotify API Documentation : https://developer.spotify.com/
-
-5. Run the command below to start the project:
+4. Run the command below to start the project:
    ```bash
     pnpm run dev
    
 
 ## February Update 
-The project is working for Deezer and Spotify one way and the other. Next step are to get a better UI experience. 
-In a future update, I'll add a  AppleMusic compatibility.
+The project now resolves links via the Songlink/Odesli API, so it works across many streaming platforms instead of just Deezer and Spotify. Next step are to get a better UI experience.

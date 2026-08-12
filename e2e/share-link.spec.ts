@@ -1,15 +1,15 @@
 import { expect, test } from '@playwright/test';
 
-test('When I share a valid Spotify link, I should get a Deezer Link', async ({ page }) => {
+test('When I share a valid streaming link, I should get links for other platforms', async ({ page }) => {
   await page.goto('http://localhost:3000');
   await expect(page.getByText('From Spotify to Deezer and the other way around')).toBeVisible();
   const inputUrl = page.getByTestId('form-url-input');
-  await inputUrl.fill('https://open.spotify.com/intl-fr/track/2RsAajgo0g7bMCHxwH3Sk0?si=fc766682c0094098');
+  await inputUrl.fill('https://www.deezer.com/track/13791930');
   const submitButton = page.getByTestId('form-url-submit');
   await submitButton.click();
-  await expect(page.getByText('You can now share this link to a Deezer User')).toBeVisible({ timeout: 15000 });
+  await expect(page.getByText('You can now share this link to a Spotify User')).toBeVisible({ timeout: 15000 });
   await expect(page.getByText('Nirvana')).toBeVisible();
-  await expect(page.getByText('Come As You Are')).toBeVisible();
+  await expect(page.getByText('Smells Like Teen Spirit')).toBeVisible();
   const retryButton = page.getByTestId('retry-button');
   await retryButton.click();
   await expect(page.getByText('From Spotify to Deezer and the other way around')).toBeVisible();

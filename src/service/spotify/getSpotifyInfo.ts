@@ -4,10 +4,10 @@ import type { SpotifyResponse } from '@/app/types/spotify';
 import type { AxiosResponse } from 'axios';
 import { getSpotifyToken } from './getSpotifyToken';
 
-export const getSpotifyInfo = async (artist: string, album: string, track: string) => {
+export const getSpotifyInfo = async (artist: string, track: string) => {
   const token = await getSpotifyToken();
 
-  const query = encodeURIComponent(`artist:"${artist}" album:"${album}" track:"${track}"`);
+  const query = encodeURIComponent(`artist:"${artist}" track:"${track}"`);
 
   const url = `https://api.spotify.com/v1/search?q=${query}&type=track`;
 
