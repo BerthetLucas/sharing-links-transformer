@@ -25,7 +25,7 @@
     "dotenv": "18.0.6",
     "jotai": "3.0.1",
     "lucide-react": "1.48.0",
-    "motion": "13.4.3",
+    "motion": "14.1.0",
     "next": "16.3.8",
     "next-intl": "4.14.7",
     "react": "19.3.0",
